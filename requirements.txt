@@ -1,5 +1,5 @@
 # SolarStorm Scout Requirements
-# Python 3.8+
+# Python 3.11+ (numpy 2.3+ requires Python 3.11)
 
 # Core dependencies
 aiohttp==3.13.2

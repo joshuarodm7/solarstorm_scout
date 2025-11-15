@@ -1,5 +1,7 @@
 # 🌞 SolarStorm Scout
 
+![SolarStorm Scout Banner](media/banner.png)
+
 **Space Weather Social Media Bot** - Automated HF propagation updates for Bluesky and Mastodon
 
 SolarStorm Scout fetches real-time space weather data from NOAA and posts threaded updates about:
@@ -62,7 +64,7 @@ Each update consists of 5 posts:
 
 ### Prerequisites
 
-- Python 3.8 or higher
+- Python 3.11 or higher (3.10 not supported due to numpy requirements)
 - Active Bluesky and/or Mastodon account
 - Linux system with systemd (for systemd installation)
 - Docker (for Docker installation)
@@ -94,30 +96,36 @@ Each update consists of 5 posts:
 
 ### Option 2: Docker Installation
 
-1. **Clone and configure:**
+1. **Pull from GitHub Container Registry:**
    ```bash
-   git clone https://github.com/ChiefGyk3D/solarstorm_scout.git
-   cd solarstorm_scout
+   docker pull ghcr.io/chiefgyk3d/solarstorm_scout:latest
+   ```
+
+2. **Create configuration:**
+   ```bash
    cp .env.example .env
    nano .env  # Edit with your credentials
    ```
 
-2. **Build and run with scheduler:**
+3. **Run container:**
    ```bash
-   docker-compose up -d
+   docker run --rm --env-file=.env ghcr.io/chiefgyk3d/solarstorm_scout:latest
    ```
 
-   This runs the bot with an integrated scheduler (posts every 1.5 hours by default).
-
-3. **Or run one-shot (with external cron):**
+4. **Or build locally:**
    ```bash
-   docker-compose -f docker-compose.oneshot.yml up
+   git clone https://github.com/ChiefGyk3D/solarstorm_scout.git
+   cd solarstorm_scout
+   docker build -t solarstorm_scout .
+   docker run --rm --env-file=.env solarstorm_scout
    ```
 
-   Add to your system cron for scheduling:
+5. **Schedule with cron:**
    ```bash
-   # Run every 1.5 hours
-   0 */1.5 * * * cd /path/to/solarstorm-scout && docker-compose -f docker-compose.oneshot.yml up
+   crontab -e
+   # Add: Run every 1.5 hours
+   0 */1 * * * docker run --rm --env-file=/path/to/.env ghcr.io/chiefgyk3d/solarstorm_scout:latest
+   30 */2 * * * docker run --rm --env-file=/path/to/.env ghcr.io/chiefgyk3d/solarstorm_scout:latest
    ```
 
 ### Option 3: Manual Installation
@@ -208,26 +216,9 @@ sudo systemctl daemon-reload
 sudo systemctl restart solarstorm-scout.timer
 ```
 
-### Docker with Ofelia Scheduler
-
-The `docker-compose.yml` uses [Ofelia](https://github.com/mcuadros/ofelia) for scheduling.
-
-**Change interval:**
-Edit `docker-compose.yml` and modify:
-```yaml
-ofelia.job-exec.solarstorm.schedule: "@every 1h30m"
-```
-
-Options: `@every 2h`, `@every 90m`, `@hourly`, etc.
-
-Restart:
-```bash
-docker-compose restart
-```
-
 ### System Cron
 
-For one-shot Docker or manual runs:
+For Docker or manual runs:
 
 ```bash
 crontab -e
@@ -235,11 +226,13 @@ crontab -e
 
 Add:
 ```cron
-# Every 1.5 hours (at :00 and :30 past hours 0,3,6,9,12,15,18,21)
-0,30 */3 * * * cd /path/to/solarstorm-scout && python3 -m solarstorm_scout.main
+# Every 1.5 hours (at :00 and :30 past odd hours)
+0 1-23/2 * * * cd /path/to/solarstorm-scout && python3 -m solarstorm_scout.main
+30 0-22/2 * * * cd /path/to/solarstorm-scout && python3 -m solarstorm_scout.main
 
 # Or with Docker
-0,30 */3 * * * cd /path/to/solarstorm-scout && docker-compose -f docker-compose.oneshot.yml up
+0 1-23/2 * * * docker run --rm --env-file=/path/to/.env ghcr.io/chiefgyk3d/solarstorm_scout:latest
+30 0-22/2 * * * docker run --rm --env-file=/path/to/.env ghcr.io/chiefgyk3d/solarstorm_scout:latest
 ```
 
 ## 📊 Data Sources
@@ -258,24 +251,31 @@ Data updated every run (default: 1.5 hours).
 ### Project Structure
 
 ```
-solarstorm-scout/
+solarstorm_scout/
 ├── solarstorm_scout/
 │   ├── __init__.py
 │   ├── main.py          # Main bot orchestrator
 │   ├── config.py        # Configuration & secrets
 │   ├── spaceweather.py  # NOAA data fetcher
 │   ├── formatter.py     # Message formatter
-│   └── social.py        # Social media posters
-├── systemd/
-│   ├── solarstorm-scout.service.template
-│   └── solarstorm-scout.timer.template
+│   ├── social.py        # Social media posters
+│   ├── chart_renderer.py # GOES X-ray chart generator
+│   └── demo.py          # Preview tool
 ├── scripts/
-│   └── install-solarstorm.sh
+│   ├── install-solarstorm.sh
+│   ├── create-secrets.sh
+│   ├── install-systemd.sh
+│   └── uninstall-systemd.sh
+├── media/
+│   ├── banner.png       # README banner
+│   ├── logo.png         # Project logo
+│   └── streamelements.png # Donation image
+├── .github/
+│   └── workflows/       # CI/CD pipelines
 ├── .env.example
 ├── requirements.txt
-├── pyproject.toml
 ├── Dockerfile
-├── docker-compose.yml
+├── LICENSE
 └── README.md
 ```
 
@@ -332,16 +332,15 @@ flake8 solarstorm_scout/
 ### Docker issues
 
 ```bash
-# View container logs
-docker logs solarstorm-scout
+# Pull latest image
+docker pull ghcr.io/chiefgyk3d/solarstorm_scout:latest
 
-# Rebuild container
-docker-compose down
-docker-compose build --no-cache
-docker-compose up -d
+# Test container manually
+docker run --rm --env-file=.env ghcr.io/chiefgyk3d/solarstorm_scout:latest
 
-# Check scheduler
-docker logs solarstorm-scheduler
+# Build locally if needed
+docker build --no-cache -t solarstorm_scout .
+docker run --rm --env-file=.env solarstorm_scout
 ```
 
 ## 📝 License

@@ -1,7 +1,7 @@
 # Continuous Integration - Tests
 #
 # This workflow runs the Python test suite to ensure code quality:
-# - Tests against multiple Python versions (3.10-3.14)
+# - Tests against multiple Python versions (3.11-3.14)
 # - Validates SolarStorm Scout structure
 # - Tests bot imports and basic functionality
 # - Validates requirements.txt
@@ -29,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
+        python-version: ['3.11', '3.12', '3.13', '3.14']
     
     steps:
     - name: Checkout code
