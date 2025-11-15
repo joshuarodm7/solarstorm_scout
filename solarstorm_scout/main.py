@@ -26,7 +26,17 @@ from solarstorm_scout.social import SocialMediaManager
 logger = logging.getLogger(__name__)
 
 # Anti-spam protection
-LAST_RUN_FILE = Path(__file__).parent.parent / "logs" / ".last_run"
+# Works in both Docker (/app/logs) and local install (project_dir/logs)
+def get_last_run_file() -> Path:
+    """Get path to last run tracking file, works in Docker and local."""
+    # Check if running in Docker
+    docker_logs = Path("/app/logs")
+    if docker_logs.exists() and docker_logs.is_dir():
+        return docker_logs / ".last_run"
+    # Local installation
+    return Path(__file__).parent.parent / "logs" / ".last_run"
+
+LAST_RUN_FILE = get_last_run_file()
 MIN_INTERVAL_MINUTES = 30  # Minimum 30 minutes between posts
 
 
