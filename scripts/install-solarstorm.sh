@@ -293,8 +293,7 @@ EnvironmentFile=$PROJECT_DIR/.env
 ExecStart=$EXEC_START
 ExecStop=$EXEC_STOP
 ExecStopPost=$EXEC_STOP_POST
-Restart=on-failure
-RestartSec=10
+# No restart on normal exit (oneshot completes when bot finishes posting)
 StandardOutput=append:$PROJECT_DIR/logs/solarstorm.log
 StandardError=append:$PROJECT_DIR/logs/solarstorm.error.log
 
@@ -338,11 +337,11 @@ Requires=solarstorm-scout.service
 
 [Timer]
 # Fixed schedule - runs at exact times
+# Note: Will NOT run on boot - only at scheduled times or manual trigger
 $CALENDAR_ENTRIES
 
 # Allow some timing jitter to reduce load spikes
 AccuracySec=1min
-Persistent=true
 
 [Install]
 WantedBy=timers.target
