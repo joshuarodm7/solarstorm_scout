@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "solarstorm_scout"
+version = "1.0.0"
+description = "Space Weather Social Media Bot - Posts HF propagation updates to Bluesky and Mastodon"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MPL-2.0"}
+authors = [
+    {name = "SolarStorm Scout Team"}
+]
+keywords = ["space-weather", "ham-radio", "propagation", "social-media", "bot"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: Mozilla Public License 2.0 (MPL-2.0)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+
+dependencies = [
+    "aiohttp>=3.9.0",
+    "atproto>=0.0.40",
+    "Mastodon.py>=1.8.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+doppler = ["dopplersdk>=1.0.0"]
+dev = ["pytest>=7.0.0", "pytest-asyncio>=0.21.0", "black>=23.0.0", "flake8>=6.0.0"]
+
+[project.scripts]
+solarstorm_scout = "solarstorm_scout.main:main"
+
+[project.urls]
+Homepage = "https://github.com/chiefgyk3d/solarstorm_scout"
+Repository = "https://github.com/chiefgyk3d/solarstorm_scout"
+Issues = "https://github.com/chiefgyk3d/solarstorm_scout/issues"
+
+[tool.setuptools]
+packages = ["solarstorm_scout"]

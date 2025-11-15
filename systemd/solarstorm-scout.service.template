@@ -1,0 +1,33 @@
+[Unit]
+Description=SolarStorm Scout - Space Weather Social Media Bot
+Documentation=https://github.com/chiefgyk3d/solarstorm-scout
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=%USER%
+Group=%GROUP%
+WorkingDirectory=%PROJECT_DIR%
+Environment="PATH=%PYTHON_PATH%"
+EnvironmentFile=%ENV_FILE%
+ExecStart=%PYTHON_BIN% -m solarstorm_scout.main
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=%PROJECT_DIR%/logs
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=solarstorm-scout
+
+# Restart policy
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

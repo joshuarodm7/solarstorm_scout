@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  solarstorm-scout:
+    build: .
+    container_name: solarstorm-scout
+    restart: unless-stopped
+    
+    # Environment variables from .env file
+    env_file:
+      - .env
+    
+    # Or use Doppler
+    # environment:
+    #   - DOPPLER_TOKEN=${DOPPLER_TOKEN}
+    
+    # Volumes for logs
+    volumes:
+      - ./logs:/app/logs
+    
+    # Run with timer using cron-like scheduling
+    # This uses ofelia for cron-like scheduling in Docker
+    labels:
+      ofelia.enabled: "true"
+      ofelia.job-exec.solarstorm.schedule: "@every 1h30m"  # 1.5 hours
+      ofelia.job-exec.solarstorm.command: "python3 -m solarstorm_scout.main"
+    
+    # Keep container running for ofelia scheduler
+    command: tail -f /dev/null
+
+  # Ofelia scheduler for running posts on timer
+  ofelia:
+    image: mcuadros/ofelia:latest
+    container_name: solarstorm-scheduler
+    restart: unless-stopped
+    depends_on:
+      - solarstorm-scout
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    labels:
+      ofelia.enabled: "true"

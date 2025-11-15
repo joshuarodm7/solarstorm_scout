@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  solarstorm-scout:
+    build: .
+    container_name: solarstorm-scout-oneshot
+    
+    # Environment variables from .env file
+    env_file:
+      - .env
+    
+    # Or use Doppler
+    # environment:
+    #   - DOPPLER_TOKEN=${DOPPLER_TOKEN}
+    
+    # Volumes for logs
+    volumes:
+      - ./logs:/app/logs
+    
+    # Run once and exit
+    # Use with external cron or systemd timer
