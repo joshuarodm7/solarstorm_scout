@@ -338,11 +338,11 @@ Requires=solarstorm-scout.service
 
 [Timer]
 # Fixed schedule - runs at exact times
+# Note: Will NOT run on boot - only at scheduled times or manual trigger
 $CALENDAR_ENTRIES
 
 # Allow some timing jitter to reduce load spikes
 AccuracySec=1min
-Persistent=true
 
 [Install]
 WantedBy=timers.target

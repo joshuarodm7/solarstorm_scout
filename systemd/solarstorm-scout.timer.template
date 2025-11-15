@@ -5,7 +5,7 @@ Requires=solarstorm-scout.service
 
 [Timer]
 # Run on timer - default 1.5 hours (90 minutes)
-OnBootSec=5min
+# Note: Will NOT run on boot - only on schedule or manual trigger
 OnUnitActiveSec=%INTERVAL_SECONDS%s
 
 # Allow some timing jitter to reduce load spikes
