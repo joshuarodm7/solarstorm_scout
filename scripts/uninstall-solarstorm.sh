@@ -94,6 +94,21 @@ if command -v docker &> /dev/null; then
     fi
 fi
 
+# Ask about .last_run file cleanup
+LAST_RUN_FILE="$PROJECT_DIR/logs/.last_run"
+if [ -f "$LAST_RUN_FILE" ]; then
+    echo ""
+    echo -e "${BLUE}Rate Limit Cleanup:${NC}"
+    read -p "Remove rate limit tracking file (.last_run)? (Y/n) " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Nn]$ ]]; then
+        rm "$LAST_RUN_FILE"
+        echo -e "${GREEN}✓${NC} Rate limit tracking file removed"
+    else
+        echo "Rate limit tracking file preserved"
+    fi
+fi
+
 echo ""
 echo "Preserved files:"
 echo "  - Project directory (contains .env and code)"
