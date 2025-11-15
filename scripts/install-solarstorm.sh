@@ -393,9 +393,9 @@ fi
 
 # Test run (optional)
 echo ""
-read -p "Would you like to run a test post now? (Y/n) " -n 1 -r
+read -p "Would you like to run a test post now? (y/N) " -n 1 -r
 echo
-if [[ ! $REPLY =~ ^[Nn]$ ]]; then
+if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo ""
     echo "Running test post..."
     sudo systemctl start solarstorm-scout.service
@@ -404,8 +404,12 @@ if [[ ! $REPLY =~ ^[Nn]$ ]]; then
     echo "Waiting for service to complete..."
     sleep 3
     
-    # Show service status
-    sudo systemctl status solarstorm-scout.service --no-pager -l
+    # Optionally show status
+    read -p "Show service status? (y/N) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        sudo systemctl status solarstorm-scout.service --no-pager -l
+    fi
 fi
 
 # Show information
