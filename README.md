@@ -33,7 +33,9 @@ Perfect for amateur radio operators, space weather enthusiasts, and anyone inter
 
 Each update consists of 5 posts:
 
-**Post 1**: Solar Indices
+### Post 1: Solar Indices
+<img src="media/solar_indices.png" alt="Solar Indices Post" width="500">
+
 - Solar Flux Index (SFI)
 - A-index & K-index
 - Critical frequency (foF2)
@@ -41,26 +43,34 @@ Each update consists of 5 posts:
 - D-Layer absorption percentage
 - NOAA Scales (R/S/G)
 
-**Post 2**: Band Conditions
+### Post 2: Band Conditions
+<img src="media/band_conditions.png" alt="Band Conditions Post" width="500">
+
 - 160m through 6m band-by-band conditions
 - Quality indicators with emojis (🟢 Good, 🟡 Fair, 🔴 Closed)
 - Best bands for current conditions
 - MUF reference
 
-**Post 3**: D-Region Absorption (with D-RAP map image)
-- Current absorption status
+### Post 3: D-Region Absorption
+<img src="media/d-region.png" alt="D-Region Absorption Post" width="500">
+
+- Current absorption status with D-RAP map image
 - Time-based context (day/night)
 - Band recommendations for conditions
 
-**Post 4**: Aurora Forecast (with aurora oval image)
-- Aurora power level
+### Post 4: Aurora Forecast
+<img src="media/aurora.png" alt="Aurora Forecast Post" width="500">
+
+- Aurora power level with aurora oval image
 - K-index
 - Visibility predictions
 - VHF propagation notes
 
-**Post 5**: GOES X-Ray Flux (with generated chart)
+### Post 5: GOES X-Ray Flux
+<img src="media/x-ray.png" alt="X-Ray Flux Post" width="500">
+
 - Current X-ray classification
-- 6-hour trend chart
+- 6-hour trend chart (generated)
 - Solar flare impact assessment
 - Radio blackout warnings
 
