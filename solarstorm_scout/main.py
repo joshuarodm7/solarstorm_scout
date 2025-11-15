@@ -11,7 +11,9 @@ Posts HF propagation updates to Bluesky and Mastodon.
 import sys
 import asyncio
 import logging
+import time
 from pathlib import Path
+from datetime import datetime, timedelta
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -23,6 +25,57 @@ from solarstorm_scout.social import SocialMediaManager
 
 logger = logging.getLogger(__name__)
 
+# Anti-spam protection
+# Works in both Docker (/app/logs) and local install (project_dir/logs)
+def get_last_run_file() -> Path:
+    """Get path to last run tracking file, works in Docker and local."""
+    # Check if running in Docker
+    docker_logs = Path("/app/logs")
+    if docker_logs.exists() and docker_logs.is_dir():
+        return docker_logs / ".last_run"
+    # Local installation
+    return Path(__file__).parent.parent / "logs" / ".last_run"
+
+LAST_RUN_FILE = get_last_run_file()
+MIN_INTERVAL_MINUTES = 30  # Minimum 30 minutes between posts
+
+
+def check_rate_limit() -> bool:
+    """
+    Check if enough time has passed since last run to prevent spam.
+    
+    Returns:
+        True if OK to post, False if too soon
+    """
+    if not LAST_RUN_FILE.exists():
+        return True
+    
+    try:
+        last_run_time = float(LAST_RUN_FILE.read_text().strip())
+        time_since_last = time.time() - last_run_time
+        minutes_since_last = time_since_last / 60
+        
+        if minutes_since_last < MIN_INTERVAL_MINUTES:
+            wait_minutes = MIN_INTERVAL_MINUTES - minutes_since_last
+            logger.warning(f"⚠ Rate limit: Last post was {minutes_since_last:.1f} minutes ago")
+            logger.warning(f"⚠ Minimum interval is {MIN_INTERVAL_MINUTES} minutes")
+            logger.warning(f"⚠ Please wait {wait_minutes:.1f} more minutes")
+            return False
+        
+        return True
+    except Exception as e:
+        logger.warning(f"Could not read last run time: {e}. Proceeding...")
+        return True
+
+
+def record_run_time():
+    """Record current timestamp to prevent spam."""
+    try:
+        LAST_RUN_FILE.parent.mkdir(parents=True, exist_ok=True)
+        LAST_RUN_FILE.write_text(str(time.time()))
+    except Exception as e:
+        logger.warning(f"Could not record run time: {e}")
+
 
 async def main():
     """Main bot execution."""
@@ -33,6 +86,11 @@ async def main():
     logger.info("=" * 50)
     logger.info("🌞 SolarStorm Scout Starting")
     logger.info("=" * 50)
+    
+    # Anti-spam check
+    if not check_rate_limit():
+        logger.error("Exiting due to rate limit")
+        sys.exit(1)
     
     # Load configuration
     config = Config()
@@ -85,6 +143,15 @@ async def main():
         logger.info(f"  Conditions: {data.get('propagation_conditions', 'N/A')}")
         logger.info(f"  X-Ray: {data.get('xray_class', 'N/A')}")
         
+        # Validate critical data is present
+        critical_fields = ['solar_flux', 'k_index', 'xray_class']
+        missing_fields = [field for field in critical_fields if data.get(field) == 'N/A']
+        
+        if missing_fields:
+            logger.error(f"Critical data missing from NOAA: {', '.join(missing_fields)}")
+            logger.error("Cannot post without complete space weather data. Will retry on next scheduled run.")
+            sys.exit(1)
+        
     except Exception as e:
         logger.error(f"Failed to fetch space weather data: {e}")
         sys.exit(1)
@@ -107,6 +174,9 @@ async def main():
         if success_count == 0:
             logger.error("Failed to post to any platforms!")
             sys.exit(1)
+        
+        # Record successful post time to prevent spam
+        record_run_time()
         
     except Exception as e:
         logger.error(f"Failed to post to social media: {e}")

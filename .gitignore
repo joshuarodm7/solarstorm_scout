@@ -58,6 +58,9 @@ htmlcov/
 # Docker
 *.dockerfile.swp
 
+# Anti-spam tracking
+.last_run
+
 # systemd generated files (keep templates)
 solarstorm-scout.service
 solarstorm-scout.timer
