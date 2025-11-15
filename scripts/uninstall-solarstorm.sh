@@ -61,7 +61,39 @@ sudo systemctl daemon-reload
 echo -e "${GREEN}✓${NC} Systemd reloaded"
 
 echo ""
-echo -e "${GREEN}Uninstall complete!${NC}"
+echo -e "${GREEN}Systemd service uninstalled!${NC}"
+echo ""
+
+# Ask about Docker cleanup
+if command -v docker &> /dev/null; then
+    echo -e "${BLUE}Docker Cleanup:${NC}"
+    echo "Do you want to remove Docker images?"
+    echo ""
+    
+    # Check for Docker images
+    LOCAL_IMAGE=$(docker images -q solarstorm-scout:local 2>/dev/null)
+    GHCR_IMAGE=$(docker images -q ghcr.io/chiefgyk3d/solarstorm_scout 2>/dev/null)
+    
+    if [ -n "$LOCAL_IMAGE" ] || [ -n "$GHCR_IMAGE" ]; then
+        read -p "Remove SolarStorm Scout Docker images? (y/N) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            if [ -n "$LOCAL_IMAGE" ]; then
+                echo "Removing local Docker image..."
+                docker rmi solarstorm-scout:local 2>/dev/null || true
+                echo -e "${GREEN}✓${NC} Local image removed"
+            fi
+            if [ -n "$GHCR_IMAGE" ]; then
+                echo "Removing GHCR Docker image..."
+                docker rmi ghcr.io/chiefgyk3d/solarstorm_scout:latest 2>/dev/null || true
+                echo -e "${GREEN}✓${NC} GHCR image removed"
+            fi
+        else
+            echo "Docker images preserved"
+        fi
+    fi
+fi
+
 echo ""
 echo "Preserved files:"
 echo "  - Project directory (contains .env and code)"

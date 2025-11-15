@@ -86,7 +86,30 @@ fi
 
 # Calculate interval in seconds for systemd
 INTERVAL_SECONDS=$(python3 -c "print(int($INTERVAL_HOURS * 3600))")
-echo -e "${GREEN}✓${NC} Interval set to ${INTERVAL_HOURS} hours ($INTERVAL_SECONDS seconds)"
+
+# Ask about timer type
+echo ""
+echo -e "${BLUE}Timer Type:${NC}"
+echo "  1) Relative timing (runs X hours after previous completion)"
+echo "     Example: If 1.5h and bot takes 2min, posts at 00:02, 01:32, 03:02..."
+echo ""
+echo "  2) Fixed schedule (runs at exact times)"
+echo "     Example: If 1.5h, posts at 00:00, 01:30, 03:00, 04:30..."
+echo ""
+read -p "Select [1-2] (default: 2): " -n 1 -r TIMER_TYPE
+echo ""
+TIMER_TYPE=${TIMER_TYPE:-2}
+
+if [[ ! $TIMER_TYPE =~ ^[1-2]$ ]]; then
+    echo -e "${RED}Invalid option${NC}"
+    exit 1
+fi
+
+if [ "$TIMER_TYPE" = "2" ]; then
+    echo -e "${GREEN}✓${NC} Fixed schedule: Posts every ${INTERVAL_HOURS} hours at exact intervals"
+else
+    echo -e "${GREEN}✓${NC} Relative timing: Posts ${INTERVAL_HOURS} hours after previous run"
+fi
 
 # Check if service already exists
 if sudo systemctl list-units --full --all | grep -q "solarstorm-scout.service"; then
@@ -291,10 +314,45 @@ fi
 
 echo -e "${GREEN}✓${NC} Service file created"
 
-# Create timer file from template
-sed -e "s|%INTERVAL_HOURS%|$INTERVAL_HOURS|g" \
-    -e "s|%INTERVAL_SECONDS%|$INTERVAL_SECONDS|g" \
-    "$PROJECT_DIR/systemd/solarstorm-scout.timer.template" | sudo tee "$TIMER_FILE" > /dev/null
+# Create timer file based on timer type
+if [ "$TIMER_TYPE" = "2" ]; then
+    # Fixed schedule with OnCalendar
+    # Generate calendar entries for the interval
+    CALENDAR_ENTRIES=$(python3 -c "
+interval = $INTERVAL_HOURS
+hours_per_day = 24
+slots = int(hours_per_day / interval)
+times = []
+for i in range(slots):
+    hour = int(i * interval)
+    minute = int((i * interval - hour) * 60)
+    times.append(f'{hour:02d}:{minute:02d}:00')
+print('\n'.join([f'OnCalendar=*-*-* {time}' for time in times]))
+")
+    
+    cat << EOF | sudo tee "$TIMER_FILE" > /dev/null
+[Unit]
+Description=SolarStorm Scout Timer - Posts space weather updates every $INTERVAL_HOURS hours
+Documentation=https://github.com/chiefgyk3d/solarstorm-scout
+Requires=solarstorm-scout.service
+
+[Timer]
+# Fixed schedule - runs at exact times
+$CALENDAR_ENTRIES
+
+# Allow some timing jitter to reduce load spikes
+AccuracySec=1min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+EOF
+else
+    # Relative timing with OnUnitActiveSec (original behavior)
+    sed -e "s|%INTERVAL_HOURS%|$INTERVAL_HOURS|g" \
+        -e "s|%INTERVAL_SECONDS%|$INTERVAL_SECONDS|g" \
+        "$PROJECT_DIR/systemd/solarstorm-scout.timer.template" | sudo tee "$TIMER_FILE" > /dev/null
+fi
 
 echo -e "${GREEN}✓${NC} Timer file created"
 
