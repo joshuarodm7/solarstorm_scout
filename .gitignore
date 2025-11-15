@@ -75,7 +75,9 @@ Desktop.ini
 # Chart outputs (if saved locally)
 *.png
 *.jpg
-!media/
+# Exception: allow media folder images
+!media/*.png
+!media/*.jpg
 
 # Doppler cache
 .doppler/
