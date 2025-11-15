@@ -14,6 +14,28 @@ from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
+def _mask_sensitive_value(key: str, value: str) -> str:
+    """
+    Mask sensitive configuration values for logging.
+    
+    Args:
+        key: Configuration key name
+        value: Configuration value
+    
+    Returns:
+        Masked value if sensitive, otherwise original value
+    """
+    sensitive_keywords = ['password', 'token', 'secret', 'key', 'credential', 'api']
+    key_lower = key.lower()
+    
+    # Check if key contains sensitive keywords
+    if any(keyword in key_lower for keyword in sensitive_keywords):
+        if len(value) <= 4:
+            return "***"
+        return f"{value[:2]}...{value[-2:]}"
+    
+    return value
+
 # Try to import optional dependencies
 try:
     from dotenv import load_dotenv
@@ -152,7 +174,8 @@ class Config:
         try:
             return int(value)
         except ValueError:
-            logger.warning(f"Invalid integer value for {key}: {value}, using default {default}")
+            masked_value = _mask_sensitive_value(key, value)
+            logger.warning(f"Invalid integer value for {key}: {masked_value}, using default {default}")
             return default
     
     def get_float(self, key: str, default: float = 0.0) -> float:
@@ -173,7 +196,8 @@ class Config:
         try:
             return float(value)
         except ValueError:
-            logger.warning(f"Invalid float value for {key}: {value}, using default {default}")
+            masked_value = _mask_sensitive_value(key, value)
+            logger.warning(f"Invalid float value for {key}: {masked_value}, using default {default}")
             return default
     
     def require(self, key: str) -> str:
