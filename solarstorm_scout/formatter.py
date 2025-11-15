@@ -130,9 +130,11 @@ MUF (DX): {muf} MHz
 D-Layer: {abs_pct}
 
 📊 NOAA Scales
-R{r_scale} S{s_scale} G{g_scale}
+📻R{r_scale} Radio Blackout
+☢️S{s_scale} Radiation Storm
+🧲G{g_scale} Geomagnetic Storm
 
-#SpaceWeather #HamRadio #Radio"""
+#SolarStormScout #HamRadio"""
     
     return ensure_char_limit(post, char_limit)
 
@@ -166,7 +168,7 @@ def format_band_conditions_post(data: Dict, char_limit: int) -> str:
 
 Based on MUF={muf}MHz
 
-#SpaceWeather #HamRadio #Radio"""
+#SolarStormScout #HamRadio"""
     
     return ensure_char_limit(post, char_limit)
 
@@ -209,7 +211,7 @@ def format_absorption_post(data: Dict, char_limit: int) -> str:
 
 {helper}
 
-#SpaceWeather #HamRadio #Radio"""
+#SolarStormScout #HamRadio"""
     
     return ensure_char_limit(post, char_limit)
 
@@ -261,7 +263,7 @@ K-index: {k_idx}
 
 {helper}
 
-#SpaceWeather #HamRadio #Radio"""
+#SolarStormScout #HamRadio"""
     
     return ensure_char_limit(post, char_limit)
 
@@ -310,7 +312,7 @@ Current: {xray_class}
 
 NOAA SWPC {now.strftime('%H:%M')}Z
 
-#SpaceWeather #HamRadio #Radio"""
+#SolarStormScout #HamRadio"""
     
     return ensure_char_limit(post, char_limit)
 
