@@ -276,6 +276,17 @@ echo "Generating systemd service files..."
 SERVICE_FILE="/etc/systemd/system/solarstorm-scout.service"
 TIMER_FILE="/etc/systemd/system/solarstorm-scout.timer"
 
+# Remove old service files to ensure clean installation
+if [ -f "$SERVICE_FILE" ]; then
+    sudo rm "$SERVICE_FILE"
+    echo -e "${GREEN}✓${NC} Removed old service file"
+fi
+
+if [ -f "$TIMER_FILE" ]; then
+    sudo rm "$TIMER_FILE"
+    echo -e "${GREEN}✓${NC} Removed old timer file"
+fi
+
 # Create service file based on deployment mode
 if [ "$DEPLOYMENT_MODE" = "3" ] || [ "$DEPLOYMENT_MODE" = "4" ]; then
     # Docker service file
