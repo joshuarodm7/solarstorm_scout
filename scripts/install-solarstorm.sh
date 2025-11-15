@@ -293,8 +293,7 @@ EnvironmentFile=$PROJECT_DIR/.env
 ExecStart=$EXEC_START
 ExecStop=$EXEC_STOP
 ExecStopPost=$EXEC_STOP_POST
-Restart=on-failure
-RestartSec=10
+# No restart on normal exit (oneshot completes when bot finishes posting)
 StandardOutput=append:$PROJECT_DIR/logs/solarstorm.log
 StandardError=append:$PROJECT_DIR/logs/solarstorm.error.log
 

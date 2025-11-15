@@ -25,9 +25,8 @@ StandardOutput=journal
 StandardError=journal
 SyslogIdentifier=solarstorm-scout
 
-# Restart policy
-Restart=on-failure
-RestartSec=10
+# No restart - oneshot service completes after each run
+# Timer will trigger next execution
 
 [Install]
 WantedBy=multi-user.target
