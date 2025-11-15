@@ -396,6 +396,18 @@ echo ""
 read -p "Would you like to run a test post now? (y/N) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
+    # Check if rate limiter exists
+    if [ -f "$PROJECT_DIR/logs/.last_run" ]; then
+        echo ""
+        echo -e "${YELLOW}Note: Rate limiter active (30-minute minimum between posts)${NC}"
+        read -p "Remove rate limit to allow test? (Y/n) " -n 1 -r
+        echo
+        if [[ ! $REPLY =~ ^[Nn]$ ]]; then
+            rm "$PROJECT_DIR/logs/.last_run"
+            echo -e "${GREEN}✓${NC} Rate limiter removed"
+        fi
+    fi
+    
     echo ""
     echo "Running test post..."
     sudo systemctl start solarstorm-scout.service
