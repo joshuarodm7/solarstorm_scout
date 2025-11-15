@@ -1,6 +1,8 @@
 # 🌞 SolarStorm Scout
 
-![SolarStorm Scout Banner](media/banner.png)
+<div align="center">
+  <img src="media/banner.png" alt="SolarStorm Scout Banner" width="400">
+</div>
 
 **Space Weather Social Media Bot** - Automated HF propagation updates for Bluesky and Mastodon
 
