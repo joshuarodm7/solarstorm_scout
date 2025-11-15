@@ -127,6 +127,17 @@ if sudo systemctl list-units --full --all | grep -q "solarstorm-scout.service"; 
             echo -e "${GREEN}✓${NC} Timer stopped"
         fi
     fi
+    
+    # Check for .last_run file (anti-spam tracking)
+    if [ -f "$PROJECT_DIR/logs/.last_run" ]; then
+        echo ""
+        read -p "Reset rate limit timer (.last_run file)? (y/N) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            rm "$PROJECT_DIR/logs/.last_run"
+            echo -e "${GREEN}✓${NC} Rate limit timer reset"
+        fi
+    fi
 fi
 
 # Ask about deployment method
@@ -227,9 +238,8 @@ if [ "$DEPLOYMENT_MODE" = "3" ] || [ "$DEPLOYMENT_MODE" = "4" ]; then
     fi
     
     # Docker-specific service configuration
+    # --rm flag automatically removes container when it exits
     EXEC_START="/usr/bin/docker run --rm --name solarstorm-scout --env-file=$PROJECT_DIR/.env -v $PROJECT_DIR/logs:/app/logs $DOCKER_IMAGE"
-    EXEC_STOP="/usr/bin/docker stop solarstorm-scout"
-    EXEC_STOP_POST="/usr/bin/docker rm -f solarstorm-scout"
     
 elif [ "$DEPLOYMENT_MODE" = "1" ]; then
     echo ""
@@ -302,9 +312,7 @@ User=$ACTUAL_USER
 WorkingDirectory=$PROJECT_DIR
 EnvironmentFile=$PROJECT_DIR/.env
 ExecStart=$EXEC_START
-ExecStop=$EXEC_STOP
-ExecStopPost=$EXEC_STOP_POST
-# No restart on normal exit (oneshot completes when bot finishes posting)
+# No ExecStop needed - --rm flag auto-removes container when it exits
 StandardOutput=append:$PROJECT_DIR/logs/solarstorm.log
 StandardError=append:$PROJECT_DIR/logs/solarstorm.error.log
 
