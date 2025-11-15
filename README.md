@@ -6,6 +6,8 @@
 
 **Space Weather Social Media Bot** - Automated HF propagation updates for Bluesky and Mastodon
 
+**🔴 Live Now:** Follow [@solarstormscout.bsky.social](https://bsky.app/profile/solarstormscout.bsky.social) on Bluesky | [@solarstormscout@social.chiefgyk3d.com](https://social.chiefgyk3d.com/@solarstormscout) on Mastodon
+
 SolarStorm Scout fetches real-time space weather data from NOAA and posts threaded updates about:
 - HF Propagation Conditions
 - D-Region Absorption Predictions
